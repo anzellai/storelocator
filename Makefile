@@ -6,7 +6,7 @@ BINARY = storelocator
 VET_REPORT = vet.report
 GOARCH = amd64
 
-VERSION?=?
+VERSION=0.0.1
 COMMIT=$(shell git rev-parse HEAD)
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
@@ -39,7 +39,7 @@ windows:
 
 vet:
 	-cd ${BUILD_DIR}; \
-	godep go vet ./... > ${VET_REPORT} 2>&1 ; \
+	go vet ./... > ${VET_REPORT} 2>&1 ; \
 	cd - >/dev/null
 
 fmt:

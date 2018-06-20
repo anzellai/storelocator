@@ -55,7 +55,7 @@ func LookupStores(keyword string) (Stores, error) {
 	}
 	keywords := []interface{}{}
 	lookupFields := LookupFields()
-	for _ = range lookupFields {
+	for range lookupFields {
 		keywords = append(keywords, "%"+keyword+"%")
 	}
 	query := strings.Join(lookupFields, " LIKE ? OR ") + " LIKE ?"
@@ -118,7 +118,7 @@ type Location struct {
 	Lng        float64 `json:"lng"`
 }
 
-// NewGeopoint returns new instance of Geopoint
+// NewLocation returns new instance of Geopoint
 func NewLocation(s *Store, lat, lng float64) Location {
 	return Location{
 		Key: s.Key,
@@ -183,6 +183,7 @@ func (s *Store) String() string {
 	)
 }
 
+// GetAddress returns string representation of address components
 func (s *Store) GetAddress() string {
 	geoAddresses := []string{}
 	if s.Address.Valid {

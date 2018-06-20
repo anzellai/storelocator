@@ -102,7 +102,9 @@ func exportPrompt() {
 	exportedPath := "./data/results"
 	exportedFile := filepath.Join(exportedPath, "stores.json")
 	if _, err := os.Stat(exportedPath); os.IsNotExist(err) {
-		os.Mkdir(exportedPath, os.ModePerm)
+		if err := os.Mkdir(exportedPath, os.ModePerm); err != nil {
+			log.Fatal(err)
+		}
 	}
 	err = ioutil.WriteFile(exportedFile, exportedBytes, 0644)
 	if err != nil {
